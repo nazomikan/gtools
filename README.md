@@ -76,6 +76,6 @@ var expandRectangle = new google.maps.Rectangle({
   fillColor: '#003399',
   fillOpacity: 0.5,
   map: map,
-  bounds: gtools.expandBounds(bounds1, 3)
+  bounds: gtools.getExpandBounds(bounds, 3)
 });
 ```
