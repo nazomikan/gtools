@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asynchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../gtools.js"></script>
+    <script type="text/javascript">
+      function initialize() {
+        var map;
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), {
+          zoom: 8,
+          center: new google.maps.LatLng(-34.397, 150.644)
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        gtools.load({v: '3.19'}, initialize);
+      } ,false);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas" width="500" height="500"></div>
+  </body>
+</html>
