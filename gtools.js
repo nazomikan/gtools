@@ -71,6 +71,39 @@
     document.body.appendChild(script);
   };
 
+  gtools.getExpandBounds = function (baseBounds, scale) {
+    var sw = baseBounds.getSouthWest()
+      , ne = baseBounds.getNorthEast()
+      , swLat = sw.lat()
+      , swLng = sw.lng()
+      , neLat = ne.lat()
+      , neLng = ne.lng()
+      , expandSw
+      , expandNe
+      , expandSwLat
+      , expandNeLat
+      , expandSwLng
+      , expandNeLng
+      , expandBounds
+      , delta
+      ;
+
+    delta = Math.abs(neLat - swLat) * (scale - 1);
+    expandNeLat = (neLat > swLat) ? (neLat + delta) : (swLat + delta);
+    expandSwLat = (neLat > swLat) ? (swLat - delta) : (neLat - delta);
+
+    delta = Math.abs(neLng - swLng) * (scale - 1);
+    expandNeLng = (neLng > swLng) ? (neLng + delta) : (swLng + delta);
+    expandSwLng = (neLng > swLng) ? (swLng - delta) : (neLng - delta);
+
+    expandNe = new google.maps.LatLng(expandNeLat, expandNeLng);
+    expandSw = new google.maps.LatLng(expandSwLat, expandSwLng);
+
+    expandBounds = new google.maps.LatLngBounds(expandSw, expandNe);
+
+    return expandBounds;
+  };
+
   function mixin(obj1, obj2) {
     var key
       ;

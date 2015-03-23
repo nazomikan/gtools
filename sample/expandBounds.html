@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Asynchronous Loading</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <script type="text/javascript" src="./gtools.js"></script>
+    <script type="text/javascript">
+    function initialize() {
+      var mapOptions = {
+        zoom: 4,
+        center: new google.maps.LatLng(0,0)
+      };
+
+      var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+      var marker1 = new google.maps.Marker({
+        position: new google.maps.LatLng(10, 10),
+        map: map
+      });
+      var bounds1 = new google.maps.LatLngBounds(
+        new google.maps.LatLng(5, 5),
+        new google.maps.LatLng(15, 15)
+      );
+      var rectangle1 = new google.maps.Rectangle({
+        fillColor: '#ff0000',
+        fillOpacity: 0.35,
+        map: map,
+        bounds: bounds1
+      });
+      var rectangle1_1 = new google.maps.Rectangle({
+        fillColor: '#003399',
+        fillOpacity: 0.5,
+        map: map,
+        bounds: gtools.expandBounds(bounds1, 3)
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      gtools.load({v: '3.19'}, initialize);
+    } ,false);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
